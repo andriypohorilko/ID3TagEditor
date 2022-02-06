@@ -24,6 +24,9 @@ class ID3FramesParser {
             let frameSize = frameSizeParser.parse(mp3: mp3,
                                                   framePosition: currentFramePosition,
                                                   version: id3Tag.properties.version)
+            
+            if currentFramePosition + frameSize > mp3.length { return }
+            
             let frame = mp3.subdata(with: NSRange(location: currentFramePosition, length: frameSize))
             id3FrameParser.parse(frame: frame, frameSize: frameSize, id3Tag: id3Tag)
             currentFramePosition += frame.count
