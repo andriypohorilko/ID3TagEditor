@@ -185,11 +185,13 @@ class ID3FrameConfiguration {
     private let encodingByte: [ID3Version: [ID3StringEncoding: [UInt8]]] = [
         .version2: [
             .ISO88591: [0x00],
-            .UTF16: [0x01]
+            .UTF16: [0x01],
+            .UTF8: [0x03]
         ],
         .version3: [
             .ISO88591: [0x00],
-            .UTF16: [0x01]
+            .UTF16: [0x01],
+            .UTF8: [0x03]
         ],
         .version4: [
             .ISO88591: [0x00],

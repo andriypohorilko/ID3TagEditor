@@ -37,16 +37,16 @@ class ID3LocalizedFrameCreator: LocalizedFrameCreator {
     private func createFrameBodyUsing(frameContent: ID3FrameWithLocalizedContent,
                                       version: ID3Version) -> [UInt8] {
         return id3FrameConfiguration.encodingByteFor(version: version, encoding: .UTF16)
-            + [UInt8](frameContent.language.rawValue.data(using: .utf8)!)
+            + [UInt8](frameContent.language.rawValue.data(using: .isoLatin1)!)
             + createFrameTextContentFrom(unsynchronisedLyric: frameContent)
     }
 
     private func createFrameTextContentFrom(unsynchronisedLyric: ID3FrameWithLocalizedContent) -> [UInt8] {
         let contentDescriptor = paddingAdder.addTo(
-            content: [UInt8](unsynchronisedLyric.contentDescription.data(using: .utf16)!),
+            content: [UInt8](unsynchronisedLyric.contentDescription.data(using: .utf8)!),
             numberOfByte: 2
         )
-        let content = unsynchronisedLyric.content.data(using: .utf16)!
+        let content = unsynchronisedLyric.content.data(using: .utf8)!
         return contentDescriptor + content
     }
 }
